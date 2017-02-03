@@ -1,0 +1,14 @@
+version: '1'
+services:
+    nginx-php:
+        image: nginx
+        command: /bin/bash -c "envsubst < /etc/nginx/conf.d/mysite.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+        ports:
+            - 8080:80
+        environment:
+            - NGINX_PORT=80
+            - NGINX_GENERATE_DEFAULT_VHOST=false
+            - TZ=Asia/Seoul
+        volumes:
+            - /Users/seotory/Workspace/we/conf.d/nginx.conf:/etc/nginx/nginx.conf
+            - /Users/seotory/Workspace/we/conf.d/site.conf:/etc/nginx/conf.d/mysite.template
